@@ -1,3 +1,8 @@
+// Jason Zhao - November 2, 2015
+// Traverse a tree in a zig-zag.  So in a full binary tree with nodes numbered 
+// in ascending order from left to right, top to bottom, a zig-zag traversal
+// would be 0 2 1 3 4 5 6 14 13 12...
+
 import java.util.*;
 
 public class Node{
