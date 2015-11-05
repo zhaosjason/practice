@@ -1,15 +1,29 @@
+import java.util.*;
+
 public class strToNum{
 	private static int strToNum(String[] arr){
 		int total = 0;
 		int temp = 0;
 		for(int i = 0; i < arr.length; i++){
-			int num = arr.get
-			if( < 100){
-				temp += 
+			int num = getNum(arr[i]);
+			if(num < 100){
+				temp += num;
+			}
+			else if(num > 100){
+				temp *= num;
+				total += temp;
+				temp = 0;
+			}
+			else{
+				temp *= num;
 			}
 		}
+
+		total += temp;
+		return total;
 	}
 
+	// Must be a better way to do this
 	private static int getNum(String str){
 		if(str.equals("one"))
 			return 1;
@@ -73,11 +87,13 @@ public class strToNum{
 			return 1000000;
 		else if(str.equals("billion"))
 			return 1000000000;
+		
+		return -1;
 	}
 
 	public static void main(String[] args){
 		Scanner in = new Scanner(System.in);
-		System.out.println("Please enter a number in word format (eg. two thousand fifty three): ");
+		System.out.print("Please enter a number in word format (eg. two thousand fifty three): ");
 		String[] str = in.nextLine().split(" ");
 
 		System.out.println(strToNum(str));
