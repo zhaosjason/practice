@@ -24,6 +24,7 @@ public class strToNum{
 	}
 
 	// Must be a better way to do this
+	// Maps words of numbers to their integer equivalents
 	private static int getNum(String str){
 		if(str.equals("one"))
 			return 1;
@@ -91,9 +92,12 @@ public class strToNum{
 		return -1;
 	}
 
+	/**
+	 *	Takes in a number as a word (ie. one hundred fifty million) and outputs the corresponding number
+	 */
 	public static void main(String[] args){
 		Scanner in = new Scanner(System.in);
-		System.out.print("Please enter a number in word format (eg. two thousand fifty three): ");
+		System.out.print("Please enter a number in word format (ie. two thousand fifty three): ");
 		String[] str = in.nextLine().split(" ");
 
 		System.out.println(strToNum(str));
