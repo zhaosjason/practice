@@ -3,6 +3,7 @@ import java.util.*;
 public class largest_run{
 	public static void main(String[] args){
 		Scanner in = new Scanner(System.in);
+		// Try: 1 -1 -12 -9 2 98 -45 2 9 2 0 0 -24 7 6 2 99 -99 99 12 -42 4 18 6 -1 -200 150
 		System.out.print("Enter space deliniated run: ");
 		String[] temp = in.nextLine().split(" ");
 
