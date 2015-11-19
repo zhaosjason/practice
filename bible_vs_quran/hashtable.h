@@ -54,10 +54,10 @@ int updateEntry(struct HashTable *ht, char *key, int value);
 int incrementEntry(struct HashTable *ht, char *key);
 
 /*
- * Finds the entry with key <key> and returns its value
- * Returns NULL if no entry is found
+ * Finds the entry with key <key> and stores its value in <dest>
+ * Returns 1 on success and 0 if no entry is found
  */
-int getEntry(struct HashTable *ht, char *key);
+int getEntry(struct HashTable *ht, char *key, int *dest);
 
 /*
  * Removes the entry with key <key>
