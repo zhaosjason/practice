@@ -2,8 +2,21 @@
 #include <string.h>
 #include "hashtable.h"
 
-// Consider researching better hashing algorithims
+// Currently using djb2 by Dan Bernstein
 unsigned int hash(struct HashTable *ht, char *key){
+	unsigned long int index = 5381;
+	int len = strlen(key);
+
+	int i;
+	for(i = 0; i < len; i++){
+		index = (index << 5) + index + key[i];
+	}
+
+	index %= ht->size;
+	return index;
+
+
+	/*** My Hashing Algorithm, pretty basic, not very good.
 	unsigned long int index = 0;
 	int len = strlen(key);
 
@@ -14,6 +27,7 @@ unsigned int hash(struct HashTable *ht, char *key){
 	}
 
 	return index;
+	***/
 }
 
 int addEntry(struct HashTable *ht, char *key, int value){
@@ -44,11 +58,35 @@ int addEntry(struct HashTable *ht, char *key, int value){
 }
 
 int updateEntry(struct HashTable *ht, char *key, int value){
-	return -1;
+	unsigned int index = hash(ht, key);
+	struct Node *temp = ht->arr[index];
+
+	while(temp){
+		if(!strcmp(temp->key, key)){
+			temp->value = value;
+			return 1;
+		}
+
+		temp = temp->next;
+	}
+
+	return 0;
 }
 
 int incrementEntry(struct HashTable *ht, char *key){
-	return -1;
+	unsigned int index = hash(ht, key);
+	struct Node *temp = ht->arr[index];
+
+	while(temp){
+		if(!strcmp(temp->key, key)){
+			temp->value++;
+			return 1;
+		}
+
+		temp = temp->next;
+	}
+
+	return 0;
 }
 
 int getEntry(struct HashTable *ht, char *key, int *dest){
@@ -68,7 +106,26 @@ int getEntry(struct HashTable *ht, char *key, int *dest){
 }
 
 int removeEntry(struct HashTable *ht, char *key){
-	return -1;
+	unsigned int index = hash(ht, key);
+	struct Node *temp = ht->arr[index];
+	struct Node *prev;
+
+	while(temp){
+		if(!strcmp(temp->key, key)){
+			if(prev)
+				prev->next = temp->next;
+			else
+				ht->arr[index] = 0;
+
+			free(temp);
+			return 1;
+		}
+
+		prev = temp;
+		temp = temp->next;
+	}
+
+	return 0;
 }
 
 void printTable(struct HashTable *ht){
@@ -89,7 +146,22 @@ void printTable(struct HashTable *ht){
 }
 
 void freeTable(struct HashTable *ht){
-	return;
+	int i;
+	for(i = 0; i < ht->size; i++){
+		if(ht->arr[i]){
+			struct Node *n = ht->arr[i];
+			struct Node *prev;
+			while(n){
+				prev = n;
+				n = n->next;
+				free(prev->key);
+				free(prev);
+			}
+		}
+	}
+
+	free(ht->arr);
+	free(ht);
 }
 
 

@@ -48,8 +48,7 @@ int updateEntry(struct HashTable *ht, char *key, int value);
 
 /*
  * Increments the value of the entry found with <key> by one
- * Adds an entry with value = 0 if no entry with key <key> is found
- * Returns 1 on successful incrementation, 0 if entry was added
+ * Returns 1 on successful incrementation, 0 if no entry is found
  */
 int incrementEntry(struct HashTable *ht, char *key);
 
