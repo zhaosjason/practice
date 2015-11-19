@@ -11,6 +11,7 @@ struct Node {
 
 struct HashTable {
 	unsigned int size;
+	unsigned int entries;
 	struct Node **arr;
 };
 
@@ -27,6 +28,7 @@ static inline void init(struct HashTable *ht, unsigned int buckets){
 
 	ht->arr = _arr;
 	ht->size = buckets;
+	ht->entries = 0;
 }
 
 /*
