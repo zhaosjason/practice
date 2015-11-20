@@ -24,7 +24,12 @@ int main(){
 	bible = malloc(sizeof(struct HashTable));
 	init(bible, buckets);
 
-	FILE *fd = fopen("bible.txt", "r");
+	char filename[30];
+	printf("Enter filename: ");
+	fgets(filename, sizeof(filename), stdin);
+	filename[strlen(filename) - 1] = '\0';
+
+	FILE *fd = fopen(filename, "r");
 
 	char c;
 	int i = 0;

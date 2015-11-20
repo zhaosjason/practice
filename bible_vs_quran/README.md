@@ -10,6 +10,11 @@ http://www.gutenberg.org/ebooks/10
 
 
 ### Things to look into
+Future Features
+ - get ranking for a word (should I compute it all ahead of time?)
+ - percent of book that is that word
+ - comparison to other text
+
 Performance & Memory Alloc
  - allocate strlen(str) bytes for keys instead of constant 20 byte buffer
  - compute list of top words ahead of time and store in reverse hashtable?
