@@ -6,7 +6,7 @@ Bible (King James version) from Project Gutenberg
 http://www.gutenberg.org/ebooks/10
 
 Qu'ran by G. Margoliouth and J. M. Rodwell from Project Gutenberg
-http://www.gutenberg.org/ebooks/10
+http://www.gutenberg.org/ebooks/2800
 
 
 
@@ -42,8 +42,9 @@ Bible
 Decided on 5000 buckets, lots of collisions but mostly confined to 2 or 3 nodes per bucket
 
 Quran
- - 5000000 buckets: 39MB memory, very few collisions
- - 50000 buckets: 1.18MB memory, acceptable number of collisions
+ - 5000000 buckets:   39MB memory     very few collisions               -
+ - 50000 buckets:     1.18MB memory   acceptable number of collisions   -
+
 
 
 
