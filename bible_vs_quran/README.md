@@ -1,5 +1,5 @@
 # Bible vs. Qu'ran
-Fun little program I wrote to compare words in the bible with words in the qu'ran.
+Fun little program I wrote to compare words in the bible to words in the qu'ran.
 
 
 Bible (King James version) from Project Gutenberg
@@ -7,6 +7,16 @@ http://www.gutenberg.org/ebooks/10
 
 Qu'ran by G. Margoliouth and J. M. Rodwell from Project Gutenberg
 http://www.gutenberg.org/ebooks/2800
+
+
+
+### Running it
+Navigate into the bible_vs_quran directory and enter the commands in terminal
+```
+make
+./main
+```
+
 
 
 
