@@ -54,6 +54,7 @@ int addEntry(struct HashTable *ht, char *key, int value){
 		temp->next = node;
 	}
 
+	ht->entries++;
 	return 1;
 }
 
@@ -125,7 +126,49 @@ int removeEntry(struct HashTable *ht, char *key){
 		temp = temp->next;
 	}
 
+	ht->entries--;
 	return 0;
+}
+
+/*
+ * Helper function for getTopNEntries(), assumes <arr> has no NULL values
+ * Returns the index of the minimum value in <arr>
+ */
+int getMin(struct Node **arr, int size){
+	int i;
+	int index = 0;
+	int min = arr[0]->value;
+	for(i = 1; i < size; i++){
+		if(arr[i]->value < min){
+			min = arr[i]->value;
+			index = i;
+		}
+	}
+
+	return index;
+}
+
+int getTopNEntries(struct HashTable *ht, struct Node **list, int n){
+	int i;
+	int addedVals = 0;
+	for(i = 0; i < ht->size; i++){
+		if(ht->arr[i]){
+			struct Node *node = ht->arr[i];
+			while(node){
+				if(addedVals < n)
+					list[addedVals++] = node;
+				else{
+					int index = getMin(list, n);
+					if(node->value > list[index]->value)
+						list[index] = node;
+				}
+
+				node = node->next;
+			}
+		}
+	}
+
+	return addedVals;
 }
 
 void printTable(struct HashTable *ht){
@@ -136,7 +179,7 @@ void printTable(struct HashTable *ht){
 
 			struct Node *n = ht->arr[i];
 			while(n){
-				printf(" %d", n->value);
+				printf("(%s %d) ", n->key, n->value);
 				n = n->next;
 			}
 

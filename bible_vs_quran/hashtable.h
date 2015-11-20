@@ -67,10 +67,10 @@ int getEntry(struct HashTable *ht, char *key, int *dest);
 int removeEntry(struct HashTable *ht, char *key);
 
 /*
- * Finds and stores the top <n> entries with the largest value in the array <arr>
- * Returns number of returned entries on success, number less than <n> on error
+ * Finds and stores the top <n> entries with the largest value in the array <list>
+ * Returns number of entries that were found, may be less than <n>
  */
-int getTopNEntries(struct HashTable *ht, struct Node **arr, int n);
+int getTopNEntries(struct HashTable *ht, struct Node **list, int n);
 
 /*
  * Prints all entries in the hashtable
