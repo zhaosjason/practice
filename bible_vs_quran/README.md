@@ -15,3 +15,22 @@ Java
 
 
 
+### Journal
+Bible
+ - 5000000 buckets:   39MB memory     very few collisions               0.393 sec
+ - 50000 buckets:     1.36MB memory   acceptable number of collisions   0.324 sec
+ - 5000 buckets:      1MB memory      nearly 100% collisions            0.310 sec
+ - 500 buckets:       972KB memory    it's getting ugly to look at      0.318 sec
+ - 50 buckets:        960KB memory    definitely 100% now               0.429 sec
+ - 10 buckets:        956KB memory    oh god...                         1.007 sec
+ - 1 bucket:          912KB memory    lol                               4.239 sec
+
+Decided on 5000 buckets, lots of collisions but mostly confined to 2 or 3 nodes per bucket
+
+Quran
+ - 5000000 buckets: 39MB memory, very few collisions
+ - 50000 buckets: 1.18MB memory, acceptable number of collision
+s
+
+
+
