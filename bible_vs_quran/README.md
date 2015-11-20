@@ -1,6 +1,14 @@
 # Bible vs. Qu'ran
 Fun little program I wrote to compare words in the bible with words in the qu'ran.
 
+Bible (King James version) from Project Gutenberg
+http://www.gutenberg.org/ebooks/10
+
+Qu'ran by G. Margoliouth and J. M. Rodwell from Project Gutenberg
+http://www.gutenberg.org/ebooks/10
+
+
+
 ### Things to look into
 Performance & Memory Alloc
  - allocate strlen(str) bytes for keys instead of constant 20 byte buffer
