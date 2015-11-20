@@ -6,9 +6,20 @@
 
 void testHashTable();
 
+/*
+ * Comparison function for qsort()
+ * Returns positive integer if a < b, 0 if a = b, and a negative integer if a > b
+ */
+int cmpFunc(const void *a, const void *b){
+	struct Node *na = *(struct Node **) a;
+	struct Node *nb = *(struct Node **) b;
+
+	return (nb->value) - (na->value);
+}
+
 int main(){
 	struct HashTable *bible;
-	unsigned int buckets = 5000000;
+	unsigned int buckets = 8000;
 
 	bible = malloc(sizeof(struct HashTable));
 	init(bible, buckets);
@@ -20,8 +31,8 @@ int main(){
 	char buff[25];
 	while((c = fgetc(fd)) != EOF){
 		if(isalpha(c))
-			buff[i++] = c;
-		else if(c == ' '){
+			buff[i++] = tolower(c);
+		else if(c == ' ' || c == '\n' || c == '-'){
 			if(i > 0){
 				buff[i] = '\0';
 				if(!incrementEntry(bible, buff))
@@ -35,13 +46,71 @@ int main(){
 
 	fclose(fd);
 
-	printf("--------------- HashTable ---------------\n");
-	printTable(bible);
-	printf("-----------------------------------------\n");
+	printf("Print hashtable? (y/n) ");
+	if(getchar() == 'y'){
+		printf("--------------- HashTable ---------------\n");
+		printTable(bible);
+		printf("-----------------------------------------\n");
+	}
 
-	//testHashTable();
+	int temp;
+	char word[25];
+	printf("---------- Lookup & List Top N ----------\n");
+	while(fgets(word, sizeof(word), stdin) != NULL){
+		word[strlen(word) - 1] = '\0';
+
+		int len = strlen(word);
+		if(len > 0){
+			int isDigit = 1;
+			int c;
+			for(c = 0; c < len; c++){
+				if(!isdigit(word[c])){
+					isDigit = 0;
+					break;
+				}
+			}
+
+			if(isDigit){
+				temp = atoi(word);
+
+				struct Node **list = malloc(sizeof(struct Node) * temp);
+				int size = getTopNEntries(bible, list, temp);
+				qsort(list, size, sizeof(struct Node *), cmpFunc);
+
+				int j;
+				for(j = 0; j < size; j++){
+					struct Node *n = list[j];
+					printf("[%03d] %s: %d\n", j + 1, n->key, n->value);
+				}
+
+				free(list);
+			}
+			else{
+				char *p = word;
+				while(*p){
+					*p = tolower(*p);
+					p++;
+				}
+
+				if(getEntry(bible, word, &temp))
+					printf("%s -> %d\n", word, temp);
+				else
+					printf("no entries found\n");
+
+			}
+		}
+	}
+
 	freeTable(bible);
+	return 0;
 }
+
+
+
+
+
+
+
 
 void testHashTable(){
 	struct HashTable *ht;
