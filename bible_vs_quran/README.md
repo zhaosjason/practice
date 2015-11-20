@@ -1,6 +1,7 @@
 # Bible vs. Qu'ran
 Fun little program I wrote to compare words in the bible with words in the qu'ran.
 
+
 Bible (King James version) from Project Gutenberg
 http://www.gutenberg.org/ebooks/10
 
@@ -42,8 +43,7 @@ Decided on 5000 buckets, lots of collisions but mostly confined to 2 or 3 nodes 
 
 Quran
  - 5000000 buckets: 39MB memory, very few collisions
- - 50000 buckets: 1.18MB memory, acceptable number of collision
-s
+ - 50000 buckets: 1.18MB memory, acceptable number of collisions
 
 
 
