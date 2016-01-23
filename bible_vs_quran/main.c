@@ -18,11 +18,11 @@ int cmpFunc(const void *a, const void *b){
 }
 
 int main(){
-	struct HashTable *bible;
+	struct HashTable *ht;
 	unsigned int buckets = 8000;
 
-	bible = malloc(sizeof(struct HashTable));
-	init(bible, buckets);
+	ht = malloc(sizeof(struct HashTable));
+	init(ht, buckets);
 
 	char filename[30];
 	printf("Enter filename: ");
@@ -40,8 +40,8 @@ int main(){
 		else if(c == ' ' || c == '\n' || c == '-'){
 			if(i > 0){
 				buff[i] = '\0';
-				if(!incrementEntry(bible, buff))
-					addEntry(bible, buff, 1);
+				if(!incrementEntry(ht, buff))
+					addEntry(ht, buff, 1);
 			}
 
 			memset(buff, 0, sizeof(buff));
@@ -54,7 +54,7 @@ int main(){
 	printf("Print hashtable? (y/n) ");
 	if(getchar() == 'y'){
 		printf("--------------- HashTable ---------------\n");
-		printTable(bible);
+		printTable(ht);
 		printf("-----------------------------------------\n");
 	}
 
@@ -79,7 +79,7 @@ int main(){
 				temp = atoi(word);
 
 				struct Node **list = malloc(sizeof(struct Node) * temp);
-				int size = getTopNEntries(bible, list, temp);
+				int size = getTopNEntries(ht, list, temp);
 				qsort(list, size, sizeof(struct Node *), cmpFunc);
 
 				int j;
@@ -97,7 +97,7 @@ int main(){
 					p++;
 				}
 
-				if(getEntry(bible, word, &temp))
+				if(getEntry(ht, word, &temp))
 					printf("%s -> %d\n", word, temp);
 				else
 					printf("no entries found\n");
@@ -106,7 +106,7 @@ int main(){
 		}
 	}
 
-	freeTable(bible);
+	freeTable(ht);
 	return 0;
 }
 
